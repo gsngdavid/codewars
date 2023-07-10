@@ -9,7 +9,7 @@ function score( dice ) {
     }, {});
     
     for(let num in countedNum) {
-        if(countedNum[num] > 3) {
+        if(countedNum[num] >= 3) {
             countedNum[num] = countedNum[num] - 3;
             if( +num === 1) {
                 score += 1000 + countedNum[num] * 100;
@@ -18,14 +18,6 @@ function score( dice ) {
                 score += 500 + countedNum[num] * 50;
             }
             else { 
-                score += +num * 100;
-            }
-        }
-        else if(countedNum[num] === 3) {
-            if( +num === 1) {
-                score += 1000;
-            }
-            else {
                 score += +num * 100;
             }
         }
