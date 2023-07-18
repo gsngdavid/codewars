@@ -1,8 +1,7 @@
-var nbrOfLaps = function (x, y) {
-    let max = x > y ? x : y;
-    
-    while(true) {
-      if(max % x === 0 && max % y === 0) return [max / x, max / y];
-      max++;
-    }
+function nbrOfLaps(x, y) {
+    let [max, min] = x > y ? [x, y] : [y, x];
+    const lar = max;
+      
+    while(max % min !== 0) max+= lar;
+      return [max / x, max / y];
   }
