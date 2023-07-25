@@ -1,9 +1,9 @@
 function yesNo(arr){
     let result = [];
     while(true) {
-        result.push(arr.splice(0, 1)[0]);
-        if(arr[0] === undefined) break;
-        arr.push(arr.splice(0, 1)[0]);
+        result.push(arr.shift());
+        if(arr.length === 0) break;
+        arr.push(arr.shift());
     }
     return result;
 }
