@@ -1,10 +1,12 @@
 function validBraces(braces) {
-    console.log('braces: ', braces);
     if(braces.length === 0) return true;
     const closingChar = getClosingChar(braces[0]);
     if(!closingChar) return false;
-    const closingCharIndex = braces.lastIndexOf(closingChar);
+    let closingCharIndex = braces.indexOf(closingChar);
     if(closingCharIndex === -1) return false;
+
+    let subString = braces.slice(1, closingCharIndex);
+    if(subString.includes(braces[0])) closingCharIndex = braces.lastIndexOf(closingChar);
     
     const subStringIsValid = validateSubString(braces.slice(1, closingCharIndex));
     
@@ -13,7 +15,6 @@ function validBraces(braces) {
 }
 
 function validateSubString(subStr) {
-    console.log('substring: ', subStr);
     if(subStr.length === 0) return true;
     const closingChar = getClosingChar(subStr[0]);
     if(!closingChar) return false;
@@ -28,6 +29,3 @@ function getClosingChar(char) {
     if(char === '[') return ']';
     return false;
 }
-
-
-console.log(validBraces('({})[({})]'));
