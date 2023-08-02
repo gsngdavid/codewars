@@ -1,23 +1,27 @@
+function getLargest(str) {
+    return str.split('').sort((a,b) => b - a).join('');
+}
+
 function nextBigger(n){
-    let str = ""+n;
-    let largest = str.split('').sort((a,b) => b - a).join('');
-    if( largest <= str) return -1;
+    let strNum = ""+n;
+    let largest = getLargest(strNum);
+    if( largest <= strNum) return -1;
     
     let result = null;
-    let i = str.length - 2;
+    let i = strNum.length - 2;
     
     while(i >= 0) {
-        let end = str.slice(i);
-        let largestEnd = end.split('').sort((a,b) => b - a).join('');
+        let end = strNum.slice(i);
+        let largestEnd = getLargest(end);
 
         if( largestEnd <= end) {
             i--;
             continue;
         }
         const sortedEndArr = end.split('').sort();
-        const nextChar = sortedEndArr.find(e => e > str[i]);
+        const nextChar = sortedEndArr.find(e => e > strNum[i]);
         const nextCharIndex = sortedEndArr.indexOf(nextChar);
-        result = str.slice(0, i) + sortedEndArr.splice(nextCharIndex, 1)[0] + sortedEndArr.join('');
+        result = strNum.slice(0, i) + sortedEndArr.splice(nextCharIndex, 1)[0] + sortedEndArr.join('');
 
         return +result;
     }
