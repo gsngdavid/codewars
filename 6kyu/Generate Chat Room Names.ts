@@ -36,11 +36,11 @@ export function generateChatRoomNames(users: string[]): string[] {
     users.length === 1 && unique.push(String(users.shift()));
     
     // Add name to common
-    console.log("LENGTH" + uniqueInitial.length);
-    for(let i = 0; i < uniqueInitial.length - 1; i++) {
+    for(let i = 0; i < uniqueInitial.length; i++) {
+        if(i === uniqueInitial.length - 1) break;
         let isUnique = true;
         for(let j = i + 1; j < uniqueInitial.length; j++) {
-            if(lName(uniqueInitial[i])[0] === lName(uniqueInitial[j])[0]) {
+            if(`${fName(uniqueInitial[i])} ${lName(uniqueInitial[i])[0]}` === `${fName(uniqueInitial[j])} ${lName(uniqueInitial[j])[0]}`) {
                 isUnique = false;
                 common.push(uniqueInitial.splice(j, 1)[0]);
                 j--;
@@ -51,16 +51,31 @@ export function generateChatRoomNames(users: string[]): string[] {
             i--;
         }
     }
-    console.log("UNIQUE INITIAL LENGTH", uniqueInitial.length);
-    console.log("UNIQUE INITIAL", uniqueInitial);
-
-    // console.log(unique);
-    // console.log(uniqueInitial);
-    // console.log(common);
+    
+    
     
     let uniqueResult = unique.map(fName);
     let uniqueInitialResult = uniqueInitial.map(name => `${fName(name)} ${lName(name)[0]}`);
-    let commonResult = common;
+    let commonResult = common.map(formattedName);
     
+    
+    console.log("COMMON LENGTH: " + common.length);
+    console.log("UNIQUE INITIAL LENGTH: " + uniqueInitial.length);
+    // if(common.length === 0 && uniqueInitial.length === 0) return [];
+
     return [...uniqueResult, ...uniqueInitialResult, ...commonResult].sort();
 }
+
+
+// [
+//     'Elijah Davis',       'Lucas Smith',
+//     'Ethan Miller',       'Lily Moore',
+//     'Noah Thomas',        'Sophia Jackson',
+//     'Emma Johnson',       'Layla Martin',
+//     'Aiden Anderson',     'Aria Jones',
+//     'Ava Gonzalez',       'Mia Williams',
+//     'Grayson Lopez',      'Madison Hernandez',
+//     'Jackson Taylor',     'Olivia Brown',
+//     'Liam Martinez',      'Caden Garcia',
+//     'Isabella Rodriguez', 'Oliver Wilson'
+//   ]
