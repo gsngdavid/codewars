@@ -1,7 +1,7 @@
 function multiply(a, b) {
     let carry = 0;
     const products = [];
-    let finalResult = '';
+
     for(let i = b.length - 1, zeros = 0; i >= 0; i--, zeros++) {
         let product = '';
         for(let j = a.length - 1; j >= 0; j--) {
@@ -18,19 +18,26 @@ function multiply(a, b) {
         }
         products.push(product + '0'.repeat(zeros));
     }
+    
+    return addingArrayElements(products);
+}
 
-    // Adding Array elements
-    const colNumber = products[products.length - 1].length;
-    const transformedProducts = products.map(el => {
+function addingArrayElements(arr) {
+    let carry = 0;
+    let finalResult = '';
+
+    const colNumber = arr[arr.length - 1].length;
+    const transformedArr = arr.map(el => {
         if(el.length < colNumber) {
             el = "0".repeat(colNumber - el.length) + el;
         }
         return el;
     });
+
     for(let col = colNumber - 1; col >= 0; col--) {
         let result = carry;
-        for(let row = 0; row < transformedProducts.length; row ++) {
-            result += +transformedProducts[row][col];
+        for(let row = 0; row < transformedArr.length; row ++) {
+            result += +transformedArr[row][col];
         }
         if(col === 0) {
             finalResult = String(result) + finalResult;
