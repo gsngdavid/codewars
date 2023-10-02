@@ -12,7 +12,6 @@ export function formattedName(name: string): string {
 }
 
 export function generateChatRoomNames(users: string[]): string[] {
-    // console.log(users);
     if(users.length === 1) return [fName(users[0])];
 
     let unique: string[] = [];
@@ -29,11 +28,11 @@ export function generateChatRoomNames(users: string[]): string[] {
                 i--;
             }
         }
-        let name = String(users.shift());
+        let name = users.shift()!;
         isUnique ? unique.push(name) : uniqueInitial.push(name);
     }
     
-    users.length === 1 && unique.push(String(users.shift()));
+    users.length === 1 && unique.push(users.shift()!);
     
     // Add name to common
     for(let i = 0; i < uniqueInitial.length; i++) {
@@ -52,30 +51,9 @@ export function generateChatRoomNames(users: string[]): string[] {
         }
     }
     
-    
-    
     let uniqueResult = unique.map(fName);
     let uniqueInitialResult = uniqueInitial.map(name => `${fName(name)} ${lName(name)[0]}`);
     let commonResult = common.map(formattedName);
-    
-    
-    console.log("COMMON LENGTH: " + common.length);
-    console.log("UNIQUE INITIAL LENGTH: " + uniqueInitial.length);
-    // if(common.length === 0 && uniqueInitial.length === 0) return [];
 
     return [...uniqueResult, ...uniqueInitialResult, ...commonResult].sort();
 }
-
-
-// [
-//     'Elijah Davis',       'Lucas Smith',
-//     'Ethan Miller',       'Lily Moore',
-//     'Noah Thomas',        'Sophia Jackson',
-//     'Emma Johnson',       'Layla Martin',
-//     'Aiden Anderson',     'Aria Jones',
-//     'Ava Gonzalez',       'Mia Williams',
-//     'Grayson Lopez',      'Madison Hernandez',
-//     'Jackson Taylor',     'Olivia Brown',
-//     'Liam Martinez',      'Caden Garcia',
-//     'Isabella Rodriguez', 'Oliver Wilson'
-//   ]
