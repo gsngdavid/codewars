@@ -6,5 +6,3 @@ const getTurkishNumber = (num) => {
     if(num[1]) return `${names[+num[0] + 9]} ${names[+num[1]]}`;
     return names[+num];
 }
-
-console.log(getTurkishNumber(94));
